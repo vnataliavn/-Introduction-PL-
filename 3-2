@@ -1,0 +1,136 @@
+#include <cmath>
+#include <iostream>
+using namespace std;
+
+/*
+*\brief Математическая функция, рассчитывающая значение факториала
+* \param int n - переменная, имеющая целочисленный тип данных
+* \return Возвращает значение res
+*/
+
+int factor1(int n);
+
+/*
+*\brief Математическая функция, рассчитывающая значение S1 - сумму для 1-го пункта задания
+* \param int n - переменная, имеющая целочисленный тип данных
+* \return Возвращает значение S1
+*/
+
+double getaS1(int n);
+
+
+/*
+*\brief Математическая функция, рассчитывающая значение S2 - сумму дял 2 пункта задания
+* \param int n - переменная, имеющая целочисленный тип данных
+* \return Возвращает значение S2
+*/
+
+double getbS2(int n, int e);
+
+/*
+*\brief Математическая функция, рассчитывающая значение min - минимальной цифры натурального числа
+* \param int N - переменная, имеющая целочисленный тип данных
+* \return Возвращает значение min
+*/
+
+int getmin(int N);
+
+/*
+*\brief Математическая функция, рассчитывающая значение max - максимальной цифры натурального числа
+* \param int N - переменная, имеющая целочисленный тип данных
+* \return Возвращает значение max
+*/
+
+int getmax(int N);
+
+/*
+* \brief Точка входа в программу.
+* \return Возвращает 0 в случае успешного выполнения.
+*/
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    int  N, n, max,min;
+    double S1, S2, S,e;
+    cout << "введите значение n: \n";
+    while (!(cin >> n) || (cin.peek() != '\n') || (n <= 0) || (n!=double(n)))
+    {
+        cin.clear();
+        while (cin.get() != '\n');
+        cout << "Введите целое положительное число больше или = 1\n ";
+    }
+    cout << "введите значение e: \n";
+    while (!(cin >> e) || (cin.peek() != '\n'))
+    {
+        cin.clear();
+        while (cin.get() != '\n');
+        cout << "Введите целое положительное число больше или = 1\n ";
+    }
+    cout << "a) вычислить сумму первых n членов последовательности (k = 1, 2, 3 ..., n). S=" << getaS1(n) << "\n";
+    cout << "b) вычислить сумму всех членов последовательности, не меньших заданного числа e. S=" << getbS2(n,e) << "\n";
+    cout << "введите значение N: \n";
+    while (!(cin >> N) || (cin.peek() != '\n') || (N < 1) || (N!=double(N)))
+    {
+        cin.clear();
+        while (cin.get() != '\n');
+        cout << "Введите натуральное число (числа, возникающие естественным образом при счёте (1, 2, 3, 4, 5, 6, 7 и так далее)\n ";
+    }
+    cout << "Доп) Найти наибольшую и наименьшую цифры в записи данного натурального числа. \n" << "min=" << getmin(N)<<" max="<<getmax(N);
+    return 0;
+}
+
+int factor1(int n)
+{
+    int res = 1;
+    for (int i = 2; i <= n; i++)
+        res = res * i;
+    return res;
+}
+
+double getaS1(int n)
+{
+    double S1 = 0, S = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        S = pow(i, 4) / factor1(i);
+        S1 = S1 + S;
+    }
+    return S1;
+}
+
+double getbS2(int n, int e)
+{
+    double S2 = 0, S = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        S = pow(i, 4) / factor1(i);
+        if (S > e) {
+            S2 = S2 + S;
+        } 
+    }
+    if (S2 == 0) {
+        cout << "b) Нет таких чисел" << endl;
+    }
+    return S2;
+}
+
+int getmin(int N) {
+    int  min = 10;
+    while (N ) {
+        int a = N % 10;
+        if (a < min) min = a;
+        N /= 10;
+    }
+    return min;
+}
+
+int getmax(int N) {
+    int  max = 0;
+    while (N) {
+        int a = N % 10;
+        if (a > max) max = a;
+        N /= 10;
+    }
+    return max;
+}
