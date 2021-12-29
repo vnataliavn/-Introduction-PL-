@@ -1,0 +1,65 @@
+
+#include <cmath>
+#include <iostream>
+using namespace std;
+
+
+/*
+*\brief Математическая функция, рассчитывающая значение Y, при x<2
+* \param double x - переменаня, имеющая тип данных с плавающей точкой двойной точности
+* \return Возвращает значение-константу Y
+*/
+
+double getY1(double x);
+
+
+/*
+*\brief Математическая функция, рассчитывающая значение Y, при x>=2
+* \param double x - переменаня, имеющая тип данных с плавающей точкой двойной точности
+* \return Возвращает значение-константу Y
+*/
+
+double getY2(double x);
+
+
+/*
+ * \brief Точка входа в программу.
+ * \return Возвращает 0 в случае успешного выполнения.
+ */
+
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    const double a = 2.3;
+    double x;
+    cout << "Введите x, x=";
+    while (!(cin >> x) || (cin.peek() != '\n'))
+    {
+        cin.clear();
+        while (cin.get() != '\n');
+        cout << "Введите число, отделяя дробную часть точкой\n ";
+    }
+    if (x < 2)
+    {
+        const auto y = getY1(x);
+        cout << "y=" << y << "\n";
+    }
+    else
+    {
+        const auto y = getY2(x);
+        cout << "y=" << y;
+    }
+
+    return 0;
+}
+
+double getY1 (double x)
+{
+    return (1.5 * pow(cos(x), 2));
+}
+
+double getY2 (double x)
+{
+    return (pow(x - 2, 2) + 6);
+}
