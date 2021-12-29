@@ -1,0 +1,36 @@
+#include <iostream>//подключение библиотеки функции ввода-вывода
+#include <cmath>//подключение математической библиотеки 
+using namespace std; //подключение пространства имён std
+
+/*
+*\brief Математическая функция, рассчитывающая кол-во унций вграммах
+* \param double n - переменная, имеющая тип данных с плавающей точкой двойной точности
+* \param const double k - константа, имеющая тип данных с плавающей точкой двойной точности
+* \return Возвращает значение унций
+*/
+double getK(double n, const double k);
+
+/*
+ * \brief Точка входа в программу.
+ * \return Возвращает 0 в случае успешного выполнения.
+ */
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    double n;
+    const double k = 28.3;
+    cout << "Сколько грамм нужно перевести в унции? ";
+    while (!(cin >> n) || (cin.peek() != '\n') || (n <= 0))
+    {
+        cin.clear();
+        while (cin.get() != '\n');
+        cout << "Введите положительное число, отделяя дробную часть точкой\n";
+    }
+    cout << n << " грамм = " << getK(n, k) << " унций" << endl; 
+    return 0; 
+}
+
+double getK(double n, const double k) {
+    return n / k;
+}
